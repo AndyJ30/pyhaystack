@@ -29,17 +29,27 @@ class EvalOpsMixin(object):
         
         // GET request
         /api/demo/eval?expr=readAll(site)
-        
-        // POST request
-        ver:"2.0"
-        expr
-        "readAll(site)"
         """
 
         url = "eval?expr=%s" % arg_expr
         return self._get_grid(url, callback=lambda *a, **k: None)
 
     def post_eval(self, arg_expr):
+        """
+        Eval
+        ====
+        Eval is used to evaluate any Axon expression.
+        Request: a grid with one column called expr and one row with Str expression to evaluate.
+        Response: result of the expression converted to a grid using Etc.toGrid
+        If an error occurs an error grid is returned.
+        Examples:
+
+        // POST request
+        ver:"3.0"
+        expr
+        "readAll(site)"
+        """
+                
         url = "eval"
         eval_grid = hszinc.Grid()
         eval_grid.column["expr"] = {}
