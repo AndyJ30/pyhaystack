@@ -61,6 +61,9 @@ class SkysparkHaystackSession(HaystackSession, evalexpr.EvalOpsMixin):
         finally:
             self._auth_op = None
 
+    def _on_nav(self, nav_id, callback, **kwargs):
+        return self._get_grid("nav", callback, args={"navId": nav_id}, **kwargs)
+
 
 class SkysparkScramHaystackSession(HaystackSession, evalexpr.EvalOpsMixin):
     """
@@ -224,3 +227,6 @@ class SkysparkScramHaystackSession(HaystackSession, evalexpr.EvalOpsMixin):
         his_grid.append({"id": self._obj_to_ref(point), "range": str_rng})
 
         return self._post_grid("hisRead", his_grid, callback, **kwargs)
+
+    def _on_nav(self, nav_id, callback, **kwargs):
+        return self._get_grid("nav", callback, args={"navId": nav_id}, **kwargs)
